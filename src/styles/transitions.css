@@ -1,0 +1,81 @@
+.flash-layer {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  opacity: 0;
+  background: #fff;
+}
+
+.flash-layer.is-firing {
+  animation: polaroid-flash 1.15s var(--ease) forwards;
+}
+
+@keyframes polaroid-flash {
+  0% {
+    opacity: 1;
+    background: #fff;
+    filter: brightness(1.8);
+  }
+  12% {
+    opacity: 1;
+    background: #fff;
+  }
+  28% {
+    opacity: 0.92;
+    background: #fff6e4;
+    filter: brightness(1.35);
+  }
+  100% {
+    opacity: 0;
+    background: var(--midnight);
+    filter: brightness(1);
+  }
+}
+
+.scene-intro {
+  display: grid;
+  place-items: center;
+  background: var(--midnight);
+  opacity: 0;
+  transition: opacity 800ms var(--ease);
+}
+
+.scene-intro.is-visible {
+  opacity: 1;
+}
+
+.intro-copy {
+  text-align: left;
+  width: min(80vw, 420px);
+}
+
+.intro-kicker {
+  margin: 0 0 18px;
+  font-size: 11px;
+  letter-spacing: 0.46em;
+  color: rgba(242, 232, 207, 0.55);
+}
+
+.intro-title {
+  margin: 0;
+  font-weight: 500;
+  font-size: clamp(36px, 7vw, 56px);
+  letter-spacing: 0.18em;
+}
+
+.intro-date {
+  margin: 22px 0 0;
+  font-size: 11px;
+  letter-spacing: 0.55em;
+  color: rgba(233, 184, 114, 0.45);
+}
+
+.intro-continue {
+  margin-top: 64px;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.42em;
+  color: rgba(242, 232, 207, 0.38);
+  cursor: default;
+}

@@ -1,0 +1,111 @@
+:root {
+  --midnight: #121829;
+  --dust: #355070;
+  --cream: #f2e8cf;
+  --old-rose: #d98c96;
+  --amber: #e9b872;
+  --mint: #77bfa3;
+  --ink: #121829;
+  --paper: #f2e8cf;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --serif: 'Iowan Old Style', Palatino, 'Palatino Linotype', 'Times New Roman', serif;
+  --sans: 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--midnight);
+  color: var(--cream);
+  font-family: var(--serif);
+}
+
+body {
+  min-height: 100svh;
+  overflow: hidden;
+}
+
+button {
+  font-family: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+#app,
+.scene-root,
+.scene {
+  min-height: 100svh;
+  width: 100%;
+}
+
+.scene {
+  position: relative;
+  overflow: hidden;
+}
+
+.night-grain {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(242, 232, 207, 0.09) 0 1px,
+      transparent 1px 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(18, 24, 41, 0.12) 0 1px,
+      transparent 1px 4px
+    );
+}
+
+.reset-progress {
+  position: fixed;
+  left: 10px;
+  bottom: 8px;
+  z-index: 40;
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(242, 232, 207, 0.22);
+}
+
+.reset-progress:hover {
+  color: rgba(242, 232, 207, 0.45);
+}
+
+.enter-arrow {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-right: 1px solid rgba(18, 24, 41, 0.45);
+  border-bottom: 1px solid rgba(18, 24, 41, 0.45);
+  transform: rotate(-45deg);
+  opacity: 0.55;
+}
+
+@media (max-width: 720px) {
+  body {
+    overflow: auto;
+  }
+}

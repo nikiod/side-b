@@ -1,13 +1,110 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>side-b</title>
+    <title>SIDE B</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div id="scene-root" class="scene-root"></div>
+      <div id="flash-layer" class="flash-layer" aria-hidden="true"></div>
+      <button type="button" id="reset-progress" class="reset-progress">
+        Reset Progress
+      </button>
+    </div>
+
+    <template id="tpl-record-desk">
+      <section class="scene scene-desk" data-scene="desk">
+        <div class="night-grain" aria-hidden="true"></div>
+        <div class="lamp-wash" aria-hidden="true"></div>
+
+        <div class="desk-surface">
+          <div class="desk-object cup" aria-hidden="true">
+            <span class="cup-rim"></span>
+            <span class="cup-body"></span>
+          </div>
+
+          <div class="desk-object stubs" aria-hidden="true">
+            <span class="stub stub-a"></span>
+            <span class="stub stub-b"></span>
+          </div>
+
+          <button type="button" class="desk-object closed-booklet" aria-label="booklet">
+            <span class="booklet-spine"></span>
+            <span class="booklet-cover"></span>
+          </button>
+
+          <div class="desk-object polaroid-peek" aria-hidden="true"></div>
+
+          <div class="desk-object cd-stage">
+            <p class="cd-aside">
+              <span>SIDE B</span>
+              <span>for 林禾</span>
+              <span>生日快乐</span>
+            </p>
+            <button type="button" class="cd-hit" aria-label="SIDE B">
+              <img class="cd-art" alt="" />
+              <span class="cd-sheen" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="cd-overlay">
+          <div class="overlay-dim"></div>
+          <div class="jewel-open">
+            <img class="cd-art overlay-cd" alt="" />
+            <article class="track-sheet">
+              <header class="track-sheet-head">
+                <p class="side-mark">SIDE B</p>
+              </header>
+              <ol class="track-list"></ol>
+              <button type="button" class="booklet-enter" aria-label="liner notes">
+                <span class="enter-arrow" aria-hidden="true"></span>
+              </button>
+            </article>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <template id="tpl-prologue">
+      <section class="scene scene-booklet" data-scene="prologue">
+        <div class="night-grain" aria-hidden="true"></div>
+        <div class="booklet-stage">
+          <article class="booklet-spread" data-page="0">
+            <div class="paper-page page-notes">
+              <div class="notes-body"></div>
+              <footer class="notes-index">SIDE B / LINER NOTES / 01</footer>
+              <button type="button" class="page-turn" aria-label="next">
+                <span class="enter-arrow" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="paper-page page-photo">
+              <button type="button" class="polaroid-hit" aria-label="photo">
+                <span class="polaroid-slot">
+                  <img class="polaroid-photo" alt="" />
+                </span>
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </template>
+
+    <template id="tpl-track-intro">
+      <section class="scene scene-intro" data-scene="track-intro">
+        <div class="night-grain" aria-hidden="true"></div>
+        <div class="intro-copy">
+          <p class="intro-kicker">TRACK 01</p>
+          <h1 class="intro-title">一天</h1>
+          <p class="intro-date" aria-hidden="true">····</p>
+          <button type="button" class="intro-continue" disabled>CONTINUE</button>
+        </div>
+      </section>
+    </template>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
