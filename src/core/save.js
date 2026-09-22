@@ -5,6 +5,9 @@ export function defaultSave() {
     prologueCompleted: false,
     currentTrack: 0,
     discoveredItems: [],
+    track01Started: false,
+    firstMeetingCompleted: false,
+    routeSolved: false,
   };
 }
 

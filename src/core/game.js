@@ -2,6 +2,7 @@ import { loadSave, writeSave, clearSave } from './save.js';
 import { mountRecordDesk } from '../scenes/recordDesk.js';
 import { mountPrologue } from '../scenes/prologue.js';
 import { mountTrackIntro } from '../scenes/trackIntro.js';
+import { mountTrack01 } from '../scenes/track01.js';
 
 export function createGame(app) {
   const root = app.querySelector('#scene-root');
@@ -29,6 +30,7 @@ export function createGame(app) {
       ...save,
       prologueCompleted: true,
       currentTrack: 1,
+      track01Started: true,
     });
 
     flash.className = 'flash-layer is-firing';
@@ -37,7 +39,24 @@ export function createGame(app) {
       flash.className = 'flash-layer';
     };
     flash.addEventListener('animationend', finish);
-    mountTrackIntro(root);
+    mountTrackIntro(root, {
+      onComplete: showTrack01,
+    });
+  }
+
+  function persist(patch) {
+    save = writeSave({
+      ...save,
+      ...patch,
+    });
+    return save;
+  }
+
+  function showTrack01() {
+    mountTrack01(root, {
+      save,
+      onSave: persist,
+    });
   }
 
   app.querySelector('#reset-progress').addEventListener('click', () => {
@@ -46,6 +65,12 @@ export function createGame(app) {
   });
 
   return {
-    start: showDesk,
+    start() {
+      if (save.track01Started || save.firstMeetingCompleted || save.routeSolved) {
+        showTrack01();
+        return;
+      }
+      showDesk();
+    },
   };
 }
