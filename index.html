@@ -21,50 +21,40 @@
         <div class="lamp-wash" aria-hidden="true"></div>
 
         <div class="desk-surface">
-          <div class="desk-object cup" aria-hidden="true">
-            <span class="cup-rim"></span>
-            <span class="cup-body"></span>
+          <div class="desk-lamp-pool" aria-hidden="true"></div>
+          <div class="desk-dim" aria-hidden="true"></div>
+
+          <div class="desk-object cup-stain" aria-hidden="true"></div>
+
+          <div class="desk-object polaroid-peek" aria-hidden="true">
+            <img class="peek-photo" alt="" draggable="false" />
           </div>
 
-          <div class="desk-object stubs" aria-hidden="true">
-            <span class="stub stub-a"></span>
-            <span class="stub stub-b"></span>
+          <div class="desk-object ticket-stub" aria-hidden="true">
+            <span class="ticket-notch"></span>
+            <span class="ticket-perf"></span>
+            <span class="ticket-rules"></span>
+            <span class="ticket-serial">0047</span>
           </div>
 
-          <button type="button" class="desk-object closed-booklet" aria-label="booklet">
-            <span class="booklet-spine"></span>
-            <span class="booklet-cover"></span>
-          </button>
-
-          <div class="desk-object polaroid-peek" aria-hidden="true"></div>
-
-          <div class="desk-object cd-stage">
-            <p class="cd-aside">
-              <span>SIDE B</span>
-              <span>for 林禾</span>
-              <span>生日快乐</span>
-            </p>
-            <button type="button" class="cd-hit" aria-label="SIDE B">
-              <img class="cd-art" alt="" />
-              <span class="cd-sheen" aria-hidden="true"></span>
+          <div class="desk-object booklet-bundle">
+            <span class="sheet-back" aria-hidden="true"></span>
+            <button type="button" class="booklet-cover-hit" aria-label="booklet">
+              <span class="booklet-spine"></span>
+              <span class="booklet-cover"></span>
             </button>
-          </div>
-        </div>
-
-        <div class="cd-overlay">
-          <div class="overlay-dim"></div>
-          <div class="jewel-open">
-            <img class="cd-art overlay-cd" alt="" />
-            <article class="track-sheet">
+            <article class="track-sheet" aria-hidden="true">
               <header class="track-sheet-head">
                 <p class="side-mark">SIDE B</p>
               </header>
               <ol class="track-list"></ol>
-              <button type="button" class="booklet-enter" aria-label="liner notes">
-                <span class="enter-arrow" aria-hidden="true"></span>
-              </button>
+              <button type="button" class="booklet-enter" aria-label="CONTINUE">CONTINUE</button>
             </article>
           </div>
+
+          <button type="button" class="desk-object case-hit" aria-label="SIDE B">
+            <img class="case-art" alt="" draggable="false" />
+          </button>
         </div>
       </section>
     </template>
@@ -72,20 +62,21 @@
     <template id="tpl-prologue">
       <section class="scene scene-booklet" data-scene="prologue">
         <div class="night-grain" aria-hidden="true"></div>
+        <div class="lamp-wash" aria-hidden="true"></div>
+        <div class="desk-surface desk-surface-quiet" aria-hidden="true"></div>
         <div class="booklet-stage">
           <article class="booklet-spread" data-page="0">
-            <div class="paper-page page-notes">
-              <div class="notes-body"></div>
-              <footer class="notes-index">SIDE B / LINER NOTES / 01</footer>
-              <button type="button" class="page-turn" aria-label="next">
-                <span class="enter-arrow" aria-hidden="true"></span>
-              </button>
-            </div>
             <div class="paper-page page-photo">
               <button type="button" class="polaroid-hit" aria-label="photo">
                 <span class="polaroid-slot">
-                  <img class="polaroid-photo" alt="" />
+                  <img class="polaroid-photo" alt="" draggable="false" />
                 </span>
+              </button>
+            </div>
+            <div class="paper-page page-notes">
+              <div class="notes-body"></div>
+              <button type="button" class="page-turn" aria-label="turn page">
+                <span class="page-ear" aria-hidden="true"></span>
               </button>
             </div>
           </article>

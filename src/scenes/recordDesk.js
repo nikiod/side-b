@@ -4,11 +4,13 @@ import { TRACK_LIST } from '../data/prologue.js';
 
 export function mountRecordDesk(root, { save, onEnterBooklet }) {
   const scene = cloneTemplate('tpl-record-desk');
-  const cdImgs = scene.querySelectorAll('.cd-art');
-  cdImgs.forEach((img) => {
-    img.src = CANON_ASSETS.cd;
-    img.alt = 'SIDE B';
-  });
+  const caseImg = scene.querySelector('.case-art');
+  caseImg.src = CANON_ASSETS.sideBCase;
+  caseImg.alt = 'SIDE B';
+
+  const peek = scene.querySelector('.peek-photo');
+  peek.src = CANON_ASSETS.firstDatePhoto;
+  peek.alt = '';
 
   const list = scene.querySelector('.track-list');
   TRACK_LIST.forEach((track) => {
@@ -24,14 +26,17 @@ export function mountRecordDesk(root, { save, onEnterBooklet }) {
     list.append(li);
   });
 
-  const openCd = () => {
+  const sheet = scene.querySelector('.track-sheet');
+
+  const openCase = () => {
     scene.classList.add('is-open');
+    sheet.setAttribute('aria-hidden', 'false');
   };
 
-  scene.querySelector('.cd-hit').addEventListener('click', openCd);
-  scene.querySelector('.closed-booklet').addEventListener('click', () => {
+  scene.querySelector('.case-hit').addEventListener('click', openCase);
+  scene.querySelector('.booklet-cover-hit').addEventListener('click', () => {
     if (scene.classList.contains('is-open')) onEnterBooklet();
-    else openCd();
+    else openCase();
   });
   scene.querySelector('.booklet-enter').addEventListener('click', () => {
     onEnterBooklet();

@@ -24,6 +24,7 @@ export function mountPrologue(root, { onPolaroidClick }) {
   scene.querySelector('.page-turn').addEventListener('click', () => {
     if (spread.dataset.page !== '0') return;
     spread.dataset.page = '1';
+    scene.classList.add('is-photo');
     notesPage.classList.add('is-leaving');
     requestAnimationFrame(() => {
       photoPage.classList.add('is-in');
