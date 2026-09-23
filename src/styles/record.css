@@ -418,6 +418,35 @@
   box-shadow: none;
 }
 
+.track-row.has-state,
+.track-open {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.45em;
+  width: 100%;
+}
+
+.track-open {
+  font-size: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.track-row.has-state .track-num {
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+
+.track-state {
+  flex: none;
+  font-family: var(--sans);
+  font-size: 7px;
+  letter-spacing: 0.12em;
+  color: rgba(18, 24, 41, 0.36);
+}
+
 .track-row:last-child {
   font-size: 11px;
   letter-spacing: 0.14em;

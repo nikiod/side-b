@@ -3,6 +3,8 @@ import { mountRecordDesk } from '../scenes/recordDesk.js';
 import { mountPrologue } from '../scenes/prologue.js';
 import { mountTrackIntro } from '../scenes/trackIntro.js';
 import { mountTrack01 } from '../scenes/track01.js';
+import { mountTrack02 } from '../scenes/track02.js';
+import { TRACK_02_TITLE } from '../data/track02.js';
 
 export function createGame(app) {
   const root = app.querySelector('#scene-root');
@@ -13,6 +15,7 @@ export function createGame(app) {
     mountRecordDesk(root, {
       save,
       onEnterBooklet: showPrologue,
+      onEnterTrack02: showTrack02,
     });
   }
 
@@ -52,10 +55,29 @@ export function createGame(app) {
     return save;
   }
 
+  function showTrack02() {
+    mountTrackIntro(root, {
+      track: TRACK_02_TITLE.kicker,
+      title: TRACK_02_TITLE.name,
+      onComplete() {
+        mountTrack02(root, {
+          onComplete() {
+            persist({ track02Completed: true });
+            showDesk();
+          },
+        });
+      },
+    });
+  }
+
   function showTrack01() {
     mountTrack01(root, {
       save,
       onSave: persist,
+      onComplete() {
+        persist({ track01Completed: true });
+        showDesk();
+      },
     });
   }
 
@@ -66,6 +88,10 @@ export function createGame(app) {
 
   return {
     start() {
+      if (save.track01Completed) {
+        showDesk();
+        return;
+      }
       if (save.track01Started || save.firstMeetingCompleted || save.routeSolved) {
         showTrack01();
         return;

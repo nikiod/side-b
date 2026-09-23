@@ -2,7 +2,7 @@ import { CANON_ASSETS } from '../core/assets.js';
 import { cloneTemplate } from '../core/dom.js';
 import { TRACK_LIST } from '../data/prologue.js';
 
-export function mountRecordDesk(root, { save, onEnterBooklet }) {
+export function mountRecordDesk(root, { save, onEnterBooklet, onEnterTrack02 }) {
   const scene = cloneTemplate('tpl-record-desk');
   const caseImg = scene.querySelector('.case-art');
   caseImg.src = CANON_ASSETS.sideBCase;
@@ -13,16 +13,73 @@ export function mountRecordDesk(root, { save, onEnterBooklet }) {
   peek.alt = '';
 
   const list = scene.querySelector('.track-list');
+  const track01Done = Boolean(save?.track01Completed);
+  const track02Done = Boolean(save?.track02Completed);
+  const trackTitles = {
+    '01': '一天',
+    '02': '没有送出去',
+    '03': '晚安曲',
+  };
+
+  function trackStatus(track) {
+    if (track.id === '01' && track01Done) return 'COMPLETED';
+    if (track.id === '02' && track02Done) return 'COMPLETED';
+    if (track.id === '02' && track01Done) return 'AVAILABLE';
+    if (track.id === '03' && track02Done) return 'AVAILABLE';
+    return '';
+  }
+
+  function trackLabel(track, status) {
+    const title = trackTitles[track.id];
+    if (status && title) return `${track.label} ${title}`;
+    return track.label;
+  }
+
   TRACK_LIST.forEach((track) => {
     const li = document.createElement('li');
+    const status = trackStatus(track);
     li.className = 'track-row';
+    if (status) li.classList.add('has-state');
     if (track.id === '01') {
       li.classList.add('is-focus');
-      if (save.prologueCompleted) li.classList.add('is-unlocked');
+      if (save.prologueCompleted || track01Done) li.classList.add('is-unlocked');
+    } else if (track.id === '02' && track01Done) {
+      li.classList.add('is-unlocked');
+    } else if (track.id === '03' && track02Done) {
+      li.classList.add('is-unlocked');
     } else {
       li.classList.add('is-locked');
     }
-    li.innerHTML = `<span class="track-num">${track.label}</span>`;
+
+    const num = document.createElement('span');
+    num.className = 'track-num';
+    num.textContent = trackLabel(track, status);
+
+    if (track.id === '02' && track01Done) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'track-open';
+      btn.append(num);
+      if (status) {
+        const state = document.createElement('span');
+        state.className = 'track-state';
+        state.textContent = status;
+        btn.append(state);
+      }
+      btn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        onEnterTrack02?.();
+      });
+      li.append(btn);
+    } else {
+      li.append(num);
+      if (status) {
+        const state = document.createElement('span');
+        state.className = 'track-state';
+        state.textContent = status;
+        li.append(state);
+      }
+    }
     list.append(li);
   });
 
@@ -32,6 +89,8 @@ export function mountRecordDesk(root, { save, onEnterBooklet }) {
     scene.classList.add('is-open');
     sheet.setAttribute('aria-hidden', 'false');
   };
+
+  if (track01Done) openCase();
 
   scene.querySelector('.case-hit').addEventListener('click', openCase);
   scene.querySelector('.booklet-cover-hit').addEventListener('click', () => {

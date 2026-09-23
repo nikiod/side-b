@@ -8,6 +8,16 @@ export function defaultSave() {
     track01Started: false,
     firstMeetingCompleted: false,
     routeSolved: false,
+    zhaimianEntranceCompleted: false,
+    zhaimianInteriorCompleted: false,
+    zhaimianInteriorChoice: '',
+    exhibitCompleted: false,
+    exhibitSeen: '',
+    cinemaCompleted: false,
+    dinnerCompleted: false,
+    dinnerChoice: '',
+    track01Completed: false,
+    track02Completed: false,
   };
 }
 
