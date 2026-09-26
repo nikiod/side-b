@@ -18,6 +18,8 @@ export function defaultSave() {
     dinnerChoice: '',
     track01Completed: false,
     track02Completed: false,
+    track03Started: false,
+    track03Completed: false,
   };
 }
 

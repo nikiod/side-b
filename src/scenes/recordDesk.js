@@ -2,7 +2,7 @@ import { CANON_ASSETS } from '../core/assets.js';
 import { cloneTemplate } from '../core/dom.js';
 import { TRACK_LIST } from '../data/prologue.js';
 
-export function mountRecordDesk(root, { save, onEnterBooklet, onEnterTrack02 }) {
+export function mountRecordDesk(root, { save, onEnterBooklet, onEnterTrack02, onEnterTrack03 }) {
   const scene = cloneTemplate('tpl-record-desk');
   const caseImg = scene.querySelector('.case-art');
   caseImg.src = CANON_ASSETS.sideBCase;
@@ -15,6 +15,7 @@ export function mountRecordDesk(root, { save, onEnterBooklet, onEnterTrack02 }) 
   const list = scene.querySelector('.track-list');
   const track01Done = Boolean(save?.track01Completed);
   const track02Done = Boolean(save?.track02Completed);
+  const track03Done = Boolean(save?.track03Completed);
   const trackTitles = {
     '01': '一天',
     '02': '没有送出去',
@@ -24,8 +25,10 @@ export function mountRecordDesk(root, { save, onEnterBooklet, onEnterTrack02 }) 
   function trackStatus(track) {
     if (track.id === '01' && track01Done) return 'COMPLETED';
     if (track.id === '02' && track02Done) return 'COMPLETED';
+    if (track.id === '03' && track03Done) return 'COMPLETED';
     if (track.id === '02' && track01Done) return 'AVAILABLE';
     if (track.id === '03' && track02Done) return 'AVAILABLE';
+    if (track.id === '04' && track03Done) return 'AVAILABLE';
     return '';
   }
 
@@ -47,6 +50,8 @@ export function mountRecordDesk(root, { save, onEnterBooklet, onEnterTrack02 }) 
       li.classList.add('is-unlocked');
     } else if (track.id === '03' && track02Done) {
       li.classList.add('is-unlocked');
+    } else if (track.id === '04' && track03Done) {
+      li.classList.add('is-unlocked');
     } else {
       li.classList.add('is-locked');
     }
@@ -55,7 +60,10 @@ export function mountRecordDesk(root, { save, onEnterBooklet, onEnterTrack02 }) 
     num.className = 'track-num';
     num.textContent = trackLabel(track, status);
 
-    if (track.id === '02' && track01Done) {
+    const canOpen02 = track.id === '02' && track01Done;
+    const canOpen03 = track.id === '03' && track02Done;
+
+    if (canOpen02 || canOpen03) {
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'track-open';
@@ -68,7 +76,8 @@ export function mountRecordDesk(root, { save, onEnterBooklet, onEnterTrack02 }) 
       }
       btn.addEventListener('click', (event) => {
         event.stopPropagation();
-        onEnterTrack02?.();
+        if (canOpen03) onEnterTrack03?.();
+        else onEnterTrack02?.();
       });
       li.append(btn);
     } else {

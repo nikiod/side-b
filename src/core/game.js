@@ -4,6 +4,7 @@ import { mountPrologue } from '../scenes/prologue.js';
 import { mountTrackIntro } from '../scenes/trackIntro.js';
 import { mountTrack01 } from '../scenes/track01.js';
 import { mountTrack02 } from '../scenes/track02.js';
+import { mountTrack03 } from '../scenes/track03.js';
 import { TRACK_02_TITLE } from '../data/track02.js';
 
 export function createGame(app) {
@@ -16,6 +17,7 @@ export function createGame(app) {
       save,
       onEnterBooklet: showPrologue,
       onEnterTrack02: showTrack02,
+      onEnterTrack03: showTrack03,
     });
   }
 
@@ -66,6 +68,19 @@ export function createGame(app) {
             showDesk();
           },
         });
+      },
+    });
+  }
+
+  function showTrack03() {
+    persist({ track03Started: true, currentTrack: 3 });
+    mountTrack03(root, {
+      onMarkComplete() {
+        persist({ track03Completed: true });
+      },
+      onComplete() {
+        persist({ track03Completed: true });
+        showDesk();
       },
     });
   }
