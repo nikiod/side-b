@@ -1,3 +1,4 @@
+import { asset } from '../core/assets.js';
 import { cloneTemplate } from '../core/dom.js';
 import {
   TRACK_03_BRIDGE,
@@ -202,7 +203,7 @@ export function mountTrack03(root, { onComplete, onMarkComplete } = {}) {
   async function enterGoodnightChat() {
     locked = true;
     setBeat('goodnightStill');
-    stillArt.src = '/canon/track03-goodnight-chat.png';
+    stillArt.src = asset('canon/track03-goodnight-chat.png');
     stillArt.classList.remove('is-wide');
     stillHit.hidden = false;
     stillHit.classList.remove('is-out', 'is-dim');
@@ -338,7 +339,7 @@ export function mountTrack03(root, { onComplete, onMarkComplete } = {}) {
       locked = true;
       await fadeOutLines();
       setBeat('meetStill');
-      await showStill('/canon/track03-meet-again.png', true);
+      await showStill(asset('canon/track03-meet-again.png'), true);
       locked = false;
       return;
     }

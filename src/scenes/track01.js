@@ -1,5 +1,5 @@
 import { cloneTemplate } from '../core/dom.js';
-import { CANON_ASSETS } from '../core/assets.js';
+import { CANON_ASSETS, asset } from '../core/assets.js';
 import {
   TRACK_01_MESSAGES,
   HE_REPLY,
@@ -21,9 +21,9 @@ import {
 } from '../data/track01.js';
 
 const CORRECT = DAY_ROUTE_SCRAPS.map((scrap) => scrap.id);
-const EXHIBIT_HALL_SRC = '/canon/track01-scene04-indie-exhibition.png';
-const CINEMA_SRC = '/canon/track01-scene05-cinema.png';
-const DINNER_SRC = '/canon/track01-scene06-dinner.png';
+const EXHIBIT_HALL_SRC = asset('canon/track01-scene04-indie-exhibition.png');
+const CINEMA_SRC = asset('canon/track01-scene05-cinema.png');
+const DINNER_SRC = asset('canon/track01-scene06-dinner.png');
 
 function watchCanonImage(src) {
   const img = new Image();

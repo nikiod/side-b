@@ -1,3 +1,4 @@
+import { asset } from '../core/assets.js';
 import { cloneTemplate } from '../core/dom.js';
 import {
   TRACK_05_END_CITY,
@@ -274,7 +275,7 @@ export function mountTrack05(root, { onComplete, onMarkComplete } = {}) {
     openPlate.classList.add('is-out');
     await wait(520);
     setBeat('redStill');
-    await showStill('/canon/track05-red-light.png');
+    await showStill(asset('canon/track05-red-light.png'));
     locked = false;
   }
 
@@ -334,7 +335,7 @@ export function mountTrack05(root, { onComplete, onMarkComplete } = {}) {
       await fadeOutLines();
       await hideCity();
       setBeat('mentosStill');
-      await showStill('/canon/track05-mentos.png');
+      await showStill(asset('canon/track05-mentos.png'));
       locked = false;
       return;
     }
@@ -413,7 +414,7 @@ export function mountTrack05(root, { onComplete, onMarkComplete } = {}) {
       stillHit.classList.add('is-out');
       await wait(520);
       stillArt.classList.remove('is-lean');
-      stillArt.src = '/canon/track05-kiss.png';
+      stillArt.src = asset('canon/track05-kiss.png');
       await wait(40);
       stillHit.classList.remove('is-out');
       stillHit.classList.add('is-in');

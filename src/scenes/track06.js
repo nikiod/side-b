@@ -1,3 +1,4 @@
+import { asset } from '../core/assets.js';
 import { cloneTemplate } from '../core/dom.js';
 import {
   TRACK_06_AFTER,
@@ -62,11 +63,11 @@ export function mountTrack06(root, { onComplete, onMarkComplete } = {}) {
   const fileEls = new Map();
   const winEls = new Map();
   let winLayer = 4;
-  const PHOTO_SRC = '/canon/photo.png';
+  const PHOTO_SRC = asset('canon/photo.png');
   const MUSIC_THUMBS = [
-    '/canon/track03-song-ice-coffee.png',
-    '/canon/track03-song-mannareo.png',
-    '/canon/track03-song-one-and-only.png',
+    asset('canon/track03-song-ice-coffee.png'),
+    asset('canon/track03-song-mannareo.png'),
+    asset('canon/track03-song-one-and-only.png'),
   ];
 
   [
@@ -528,7 +529,7 @@ export function mountTrack06(root, { onComplete, onMarkComplete } = {}) {
       await wait(720);
       desk.hidden = true;
       setBeat('endStill');
-      await showStill('/canon/track06-ending-screen.png');
+      await showStill(asset('canon/track06-ending-screen.png'));
       locked = false;
       return;
     }

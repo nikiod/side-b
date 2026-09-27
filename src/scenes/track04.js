@@ -1,3 +1,4 @@
+import { asset } from '../core/assets.js';
 import { cloneTemplate } from '../core/dom.js';
 import {
   TRACK_04_CODA,
@@ -386,7 +387,7 @@ export function mountTrack04(root, { onComplete, onMarkComplete } = {}) {
       opening.hidden = true;
       openPlate.hidden = true;
       setBeat('homeStill');
-      await showStill('/canon/track04-home-life.png', 'home');
+      await showStill(asset('canon/track04-home-life.png'), 'home');
       locked = false;
       return;
     }
@@ -425,7 +426,7 @@ export function mountTrack04(root, { onComplete, onMarkComplete } = {}) {
       await wait(720);
       planner.hidden = true;
       setBeat('unsaidStill');
-      await showStill('/canon/track04-unsaid.png', 'wide');
+      await showStill(asset('canon/track04-unsaid.png'), 'wide');
       locked = false;
       return;
     }
@@ -465,7 +466,7 @@ export function mountTrack04(root, { onComplete, onMarkComplete } = {}) {
       await fadeOutLines();
       scene.classList.remove('is-navy');
       setBeat('winterStill');
-      await showStill('/canon/track04-ending-winter.png', 'wide');
+      await showStill(asset('canon/track04-ending-winter.png'), 'wide');
       locked = false;
       return;
     }

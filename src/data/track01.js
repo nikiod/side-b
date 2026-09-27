@@ -1,3 +1,5 @@
+import { asset } from '../core/assets.js';
+
 export const TRACK_01_MESSAGES = [
   { from: '许遥', text: '我到了。' },
   { from: '许遥', text: '你从哪个门出来？' },
@@ -71,7 +73,7 @@ export const EXHIBIT_ITEMS = [
   {
     id: 'poster',
     label: '画',
-    src: '/canon/track01-scene04a-exhibit-poster.png',
+    src: asset('canon/track01-scene04a-exhibit-poster.png'),
     lines: [
       { speaker: '许遥', text: '这个有点像老电影海报。' },
       { speaker: '林禾', text: '有点奇怪。' },
@@ -81,7 +83,7 @@ export const EXHIBIT_ITEMS = [
   {
     id: 'jewelry',
     label: '饰品',
-    src: '/canon/track01-scene04b-exhibit-jewelry.png',
+    src: asset('canon/track01-scene04b-exhibit-jewelry.png'),
     lines: [
       { speaker: '许遥', text: '这个你会戴吗？' },
       { speaker: '林禾', text: '不会。' },
@@ -91,7 +93,7 @@ export const EXHIBIT_ITEMS = [
   {
     id: 'dolls',
     label: '玩偶',
-    src: '/canon/track01-scene04c-exhibit-dolls.png',
+    src: asset('canon/track01-scene04c-exhibit-dolls.png'),
     lines: [
       { speaker: '许遥', text: '这个有点可爱。' },
       { speaker: '林禾', text: '你确定？' },

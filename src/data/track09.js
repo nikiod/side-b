@@ -1,9 +1,11 @@
+import { asset } from '../core/assets.js';
+
 export const TRACK_09_IMAGES = {
-  choice: '/canon/track09-choice-night.png',
-  night: '/canon/track09-night-walk.png',
-  snack: '/canon/track09-late-snack.png',
-  home: '/canon/track09-home.png',
-  ending: '/canon/track09-ending.png',
+  choice: asset('canon/track09-choice-night.png'),
+  night: asset('canon/track09-night-walk.png'),
+  snack: asset('canon/track09-late-snack.png'),
+  home: asset('canon/track09-home.png'),
+  ending: asset('canon/track09-ending.png'),
 };
 
 export const TRACK_09_CHOICES = [

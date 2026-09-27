@@ -1,14 +1,16 @@
+import { asset } from '../core/assets.js';
+
 export const TRACK_03_TITLE = {
   kicker: '03',
   name: '晚安曲',
 };
 
 export const TRACK_03_SONGS = [
-  { src: '/canon/track03-song-ice-coffee.png', note: '一首。' },
-  { src: '/canon/track03-song-mannareo.png', note: '又一首。' },
-  { src: '/canon/track03-song-one-and-only.png', note: '' },
-  { src: '/canon/track03-song-secret.png', note: '' },
-  { src: '/canon/track03-song-just-the-two.png', note: '' },
+  { src: asset('canon/track03-song-ice-coffee.png'), note: '一首。' },
+  { src: asset('canon/track03-song-mannareo.png'), note: '又一首。' },
+  { src: asset('canon/track03-song-one-and-only.png'), note: '' },
+  { src: asset('canon/track03-song-secret.png'), note: '' },
+  { src: asset('canon/track03-song-just-the-two.png'), note: '' },
 ];
 
 export const TRACK_03_OPENING = [

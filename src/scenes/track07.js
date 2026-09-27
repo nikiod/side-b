@@ -1,3 +1,4 @@
+import { asset } from '../core/assets.js';
 import { cloneTemplate } from '../core/dom.js';
 import {
   TRACK_07_KEY,
@@ -315,7 +316,7 @@ export function mountTrack07(root, { onComplete, onMarkComplete } = {}) {
     scene.classList.add('is-clipping');
     clip.classList.toggle('is-left', which === 'xu');
     clip.classList.toggle('is-right', which === 'lin');
-    clipArt.src = which === 'xu' ? '/canon/track07-xuyao-life.png' : '/canon/track07-linhe-life.png';
+    clipArt.src = which === 'xu' ? asset('canon/track07-xuyao-life.png') : asset('canon/track07-linhe-life.png');
     clipNote.replaceChildren();
     const lines = which === 'xu' ? TRACK_07_XU_NOTE : TRACK_07_LIN_NOTE[0];
     if (which === 'lin') linNoteStep = 0;
@@ -364,11 +365,11 @@ export function mountTrack07(root, { onComplete, onMarkComplete } = {}) {
     scene.classList.remove('is-clipping');
     if (closing === 'xu') {
       xuyaoLifeClosed = true;
-      plantThumb('xu', '/canon/track07-xuyao-life.png');
+      plantThumb('xu', asset('canon/track07-xuyao-life.png'));
     }
     if (closing === 'lin') {
       linheLifeClosed = true;
-      plantThumb('lin', '/canon/track07-linhe-life.png');
+      plantThumb('lin', asset('canon/track07-linhe-life.png'));
     }
     gate = null;
     locked = false;
@@ -385,7 +386,7 @@ export function mountTrack07(root, { onComplete, onMarkComplete } = {}) {
     await wait(reduced ? 420 : 820);
     sides.hidden = true;
     scene.classList.add('is-navy');
-    stillArt.src = '/canon/track07-two-nights.png';
+    stillArt.src = asset('canon/track07-two-nights.png');
     stillHit.hidden = false;
     await wait(40);
     stillHit.classList.add('is-in');

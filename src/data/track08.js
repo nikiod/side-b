@@ -1,13 +1,15 @@
+import { asset } from '../core/assets.js';
+
 export const TRACK_08_TITLE = {
   kicker: '08',
   name: '回来以后',
 };
 
 export const TRACK_08_IMAGES = {
-  opening: '/canon/track08-opening-return.png',
-  daily: '/canon/track08-daily-life.png',
-  home: '/canon/track08-home.png',
-  night: '/canon/track08-night-home.png',
+  opening: asset('canon/track08-opening-return.png'),
+  daily: asset('canon/track08-daily-life.png'),
+  home: asset('canon/track08-home.png'),
+  night: asset('canon/track08-night-home.png'),
 };
 
 export const TRACK_08_MSG = ['后来，', '又开始说话了。'];
