@@ -439,6 +439,11 @@
   white-space: nowrap;
 }
 
+.track-row.has-state .track-num.is-long {
+  white-space: normal;
+  letter-spacing: 0.08em;
+}
+
 .track-state {
   flex: none;
   font-family: var(--sans);

@@ -20,6 +20,19 @@ export function defaultSave() {
     track02Completed: false,
     track03Started: false,
     track03Completed: false,
+    track04Started: false,
+    track04Completed: false,
+    track05Started: false,
+    track05Completed: false,
+    track06Started: false,
+    track06Completed: false,
+    track07Started: false,
+    track07Completed: false,
+    track08Started: false,
+    track08Completed: false,
+    track09Started: false,
+    track09Completed: false,
+    track09Choice: '',
   };
 }
 

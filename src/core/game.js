@@ -5,6 +5,12 @@ import { mountTrackIntro } from '../scenes/trackIntro.js';
 import { mountTrack01 } from '../scenes/track01.js';
 import { mountTrack02 } from '../scenes/track02.js';
 import { mountTrack03 } from '../scenes/track03.js';
+import { mountTrack04 } from '../scenes/track04.js';
+import { mountTrack05 } from '../scenes/track05.js';
+import { mountTrack06 } from '../scenes/track06.js';
+import { mountTrack07 } from '../scenes/track07.js';
+import { mountTrack08 } from '../scenes/track08.js';
+import { mountTrack09 } from '../scenes/track09.js';
 import { TRACK_02_TITLE } from '../data/track02.js';
 
 export function createGame(app) {
@@ -18,6 +24,12 @@ export function createGame(app) {
       onEnterBooklet: showPrologue,
       onEnterTrack02: showTrack02,
       onEnterTrack03: showTrack03,
+      onEnterTrack04: showTrack04,
+      onEnterTrack05: showTrack05,
+      onEnterTrack06: showTrack06,
+      onEnterTrack07: showTrack07,
+      onEnterTrack08: showTrack08,
+      onEnterTrack09: showTrack09,
     });
   }
 
@@ -68,6 +80,87 @@ export function createGame(app) {
             showDesk();
           },
         });
+      },
+    });
+  }
+
+  function showTrack09() {
+    persist({ track09Started: true, currentTrack: 9 });
+    mountTrack09(root, {
+      onChoose(choice) {
+        persist({ track09Choice: choice });
+      },
+      onMarkComplete() {
+        persist({ track09Completed: true });
+      },
+      onComplete() {
+        persist({ track09Completed: true });
+        showDesk();
+      },
+    });
+  }
+
+  function showTrack08() {
+    persist({ track08Started: true, currentTrack: 8 });
+    mountTrack08(root, {
+      onMarkComplete() {
+        persist({ track08Completed: true });
+      },
+      onComplete() {
+        persist({ track08Completed: true });
+        showDesk();
+      },
+    });
+  }
+
+  function showTrack07() {
+    persist({ track07Started: true, currentTrack: 7 });
+    mountTrack07(root, {
+      onMarkComplete() {
+        persist({ track07Completed: true });
+      },
+      onComplete() {
+        persist({ track07Completed: true });
+        showDesk();
+      },
+    });
+  }
+
+  function showTrack06() {
+    persist({ track06Started: true, currentTrack: 6 });
+    mountTrack06(root, {
+      onMarkComplete() {
+        persist({ track06Completed: true });
+      },
+      onComplete() {
+        persist({ track06Completed: true });
+        showDesk();
+      },
+    });
+  }
+
+  function showTrack05() {
+    persist({ track05Started: true, currentTrack: 5 });
+    mountTrack05(root, {
+      onMarkComplete() {
+        persist({ track05Completed: true });
+      },
+      onComplete() {
+        persist({ track05Completed: true });
+        showDesk();
+      },
+    });
+  }
+
+  function showTrack04() {
+    persist({ track04Started: true, currentTrack: 4 });
+    mountTrack04(root, {
+      onMarkComplete() {
+        persist({ track04Completed: true });
+      },
+      onComplete() {
+        persist({ track04Completed: true });
+        showDesk();
       },
     });
   }
