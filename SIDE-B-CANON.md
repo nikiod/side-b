@@ -96,7 +96,7 @@ Late-night City Pop × Jazz Bar × Old Magazine
 
 当天路线：
 
-斋面
+素面
 → 小展
 → 电影
 → 晚饭
@@ -108,7 +108,7 @@ Late-night City Pop × Jazz Bar × Old Magazine
 “这样可以。”
 
 “那……进去？”
-放在斋面入口，不放在办公楼门口。
+放在素面入口，不放在办公楼门口。
 
 人物固定：
 林禾 = 短发眼镜黑 T

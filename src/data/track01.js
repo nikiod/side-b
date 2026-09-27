@@ -8,7 +8,7 @@ export const TRACK_01_MESSAGES = [
 export const HE_REPLY = '马上。';
 
 export const DAY_ROUTE_SCRAPS = [
-  { id: 'noodles', title: '斋面', times: ['11:00—14:00'], kind: 'pass' },
+  { id: 'noodles', title: '素面', times: ['11:00—14:00'], kind: 'pass' },
   { id: 'exhibit', title: '小展', times: ['13:00—17:30'], kind: 'note' },
   { id: 'movie', title: '电影', times: ['15:40 开场', '17:28 结束'], kind: 'ticket' },
   { id: 'dinner', title: '晚饭', times: ['17:30 后'], kind: 'stamp' },
