@@ -72,8 +72,8 @@ export const TRACK_08_DAYS = [
     auto: false,
     items: [
       { id: 'pickup', label: '接送', lines: ['下来。', '马上。'] },
-      { id: 'eat', label: '吃饭', lines: ['先吃。'] },
-      { id: 'back', label: '回家', lines: ['到了说一声。'] },
+      { id: 'eat', label: '吃饭', lines: ['晚上想吃什么？', '都可以～辛苦啦。'] },
+      { id: 'back', label: '回家', lines: ['我们回家。'] },
     ],
   },
   {
@@ -81,8 +81,8 @@ export const TRACK_08_DAYS = [
     auto: false,
     items: [
       { id: 'cat', label: '猫', lines: ['布总今天还好。'] },
-      { id: 'stuff', label: '生活用品', lines: ['又少了一点。'] },
-      { id: 'cook', label: '做饭', lines: ['今晚这个。'] },
+      { id: 'stuff', label: '生活用品', lines: ['家里纸巾快没了。'] },
+      { id: 'cook', label: '做饭', lines: ['今天两菜一汤吧。'] },
     ],
   },
   {
@@ -126,7 +126,7 @@ export const TRACK_08_HOME = [
 export const TRACK_08_HOME_NEED = 2;
 
 export const TRACK_08_ENDING = [
-  ['原来最近的日子，', '已经装进了这么多小事。'],
+  ['最近的日子，', '好像还挺热闹的。'],
   ['今天也是。'],
   ['00:07'],
   ['到家了。'],

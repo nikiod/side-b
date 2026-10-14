@@ -148,7 +148,8 @@ export function mountTrack01(root, { save, onSave, onComplete } = {}) {
 
   function dinnerLineMarkup(line) {
     const p = document.createElement('p');
-    p.className = `dinner-line is-${noodleSide(line.speaker)}`;
+    const wide = line.text === '听起来像工作总结。' ? ' is-wide' : '';
+    p.className = `dinner-line is-${noodleSide(line.speaker)}${wide}`;
     p.innerHTML = `<span class="meeting-speaker">${line.speaker}</span><span class="meeting-text">${line.text}</span>`;
     return p;
   }

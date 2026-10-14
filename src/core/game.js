@@ -1,3 +1,4 @@
+import { audioManager } from './audio.js';
 import { loadSave, writeSave, clearSave } from './save.js';
 import { mountRecordDesk } from '../scenes/recordDesk.js';
 import { mountPrologue } from '../scenes/prologue.js';
@@ -34,12 +35,14 @@ export function createGame(app) {
   }
 
   function showPrologue() {
+    audioManager.cue('prologue');
     mountPrologue(root, {
       onPolaroidClick: enterTrackIntro,
     });
   }
 
   function enterTrackIntro() {
+    audioManager.cue('track01');
     if (!save.discoveredItems.includes('firstDatePhoto')) {
       save.discoveredItems = [...save.discoveredItems, 'firstDatePhoto'];
     }
@@ -70,6 +73,7 @@ export function createGame(app) {
   }
 
   function showTrack02() {
+    audioManager.cue('track02');
     mountTrackIntro(root, {
       track: TRACK_02_TITLE.kicker,
       title: TRACK_02_TITLE.name,
@@ -85,6 +89,7 @@ export function createGame(app) {
   }
 
   function showTrack09() {
+    audioManager.cue('track09');
     persist({ track09Started: true, currentTrack: 9 });
     mountTrack09(root, {
       onChoose(choice) {
@@ -101,6 +106,7 @@ export function createGame(app) {
   }
 
   function showTrack08() {
+    audioManager.cue('track08');
     persist({ track08Started: true, currentTrack: 8 });
     mountTrack08(root, {
       onMarkComplete() {
@@ -114,6 +120,7 @@ export function createGame(app) {
   }
 
   function showTrack07() {
+    audioManager.cue('track07');
     persist({ track07Started: true, currentTrack: 7 });
     mountTrack07(root, {
       onMarkComplete() {
@@ -127,6 +134,7 @@ export function createGame(app) {
   }
 
   function showTrack06() {
+    audioManager.cue('track06');
     persist({ track06Started: true, currentTrack: 6 });
     mountTrack06(root, {
       onMarkComplete() {
@@ -140,6 +148,7 @@ export function createGame(app) {
   }
 
   function showTrack05() {
+    audioManager.cue('track05');
     persist({ track05Started: true, currentTrack: 5 });
     mountTrack05(root, {
       onMarkComplete() {
@@ -153,6 +162,7 @@ export function createGame(app) {
   }
 
   function showTrack04() {
+    audioManager.cue('track04');
     persist({ track04Started: true, currentTrack: 4 });
     mountTrack04(root, {
       onMarkComplete() {
@@ -166,6 +176,7 @@ export function createGame(app) {
   }
 
   function showTrack03() {
+    audioManager.cue('track03');
     persist({ track03Started: true, currentTrack: 3 });
     mountTrack03(root, {
       onMarkComplete() {
@@ -179,6 +190,7 @@ export function createGame(app) {
   }
 
   function showTrack01() {
+    audioManager.cue('track01');
     mountTrack01(root, {
       save,
       onSave: persist,
@@ -188,6 +200,8 @@ export function createGame(app) {
       },
     });
   }
+
+  audioManager.mount(app);
 
   app.querySelector('#reset-progress').addEventListener('click', () => {
     clearSave();

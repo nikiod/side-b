@@ -10,6 +10,7 @@
     <div id="app">
       <div id="scene-root" class="scene-root"></div>
       <div id="flash-layer" class="flash-layer" aria-hidden="true"></div>
+      <button type="button" id="music-toggle" class="music-toggle" aria-pressed="false">♪ ON</button>
       <button type="button" id="reset-progress" class="reset-progress">
         Reset Progress
       </button>
@@ -492,10 +493,9 @@
       <section class="scene scene-track09" data-scene="track-09" data-phase="opening" data-step="title">
         <div class="night-grain" aria-hidden="true"></div>
         <div class="t09-opening">
-          <p class="t09-kicker">TRACK 09</p>
-          <div class="t09-now" hidden>
-            <p class="t09-now-title">SIDE B</p>
-            <p class="t09-now-sub">NOW PLAYING</p>
+          <div class="t09-open-copy">
+            <p class="intro-kicker">TRACK 09</p>
+            <div class="t09-open-lines"></div>
           </div>
         </div>
         <section class="t09-choice" hidden>
@@ -541,8 +541,22 @@
           </div>
         </section>
         <section class="t09-zero" hidden>
-          <button type="button" class="t09-clock">00:07</button>
+          <div class="t09-folio">
+            <p class="t09-clock" aria-label="00:07">
+              <span class="t09-clock-hour">00</span>
+              <span class="t09-clock-colon" aria-hidden="true">:</span>
+              <span class="t09-clock-min">07</span>
+            </p>
+            <div class="t09-folio-side">
+              <p class="t09-folio-kicker">TRACK 09 / AFTER MIDNIGHT</p>
+              <span class="t09-folio-rule" aria-hidden="true"></span>
+            </div>
+          </div>
+          <p class="t09-folio-mark" aria-hidden="true">09</p>
+          <div class="t09-talk"></div>
+          <p class="t09-talk-next">继续 →</p>
           <div class="t09-zero-copy"></div>
+          <button type="button" class="t09-sit" hidden>再坐一会儿 →</button>
         </section>
         <section class="t09-home track09-scene" hidden>
           <div class="track09-stage">

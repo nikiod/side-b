@@ -4,6 +4,7 @@ import {
   TRACK_09_IMAGES,
   TRACK_09_OPENING,
   TRACK_09_SHARED,
+  TRACK_09_ZERO,
 } from '../data/track09.js';
 
 function wait(ms) {
@@ -17,8 +18,7 @@ function prefersReducedMotion() {
 export function mountTrack09(root, { onChoose, onComplete, onMarkComplete } = {}) {
   const scene = cloneTemplate('tpl-track-09');
   const opening = scene.querySelector('.t09-opening');
-  const kicker = scene.querySelector('.t09-kicker');
-  const nowPlaying = scene.querySelector('.t09-now');
+  const openLines = scene.querySelector('.t09-open-lines');
   const linesBox = scene.querySelector('.t09-lines');
   const choice = scene.querySelector('.t09-choice');
   const walk = scene.querySelector('.t09-walk');
@@ -29,7 +29,8 @@ export function mountTrack09(root, { onChoose, onComplete, onMarkComplete } = {}
   const snackFood = scene.querySelector('.t09-dish');
   const zero = scene.querySelector('.t09-zero');
   const zeroCopy = scene.querySelector('.t09-zero-copy');
-  const clock = scene.querySelector('.t09-clock');
+  const talk = scene.querySelector('.t09-talk');
+  const sit = scene.querySelector('.t09-sit');
   const home = scene.querySelector('.t09-home');
   const homeMedia = home.querySelector('.track09-media');
   const homeCopy = home.querySelector('.t09-copy-line');
@@ -55,6 +56,7 @@ export function mountTrack09(root, { onChoose, onComplete, onMarkComplete } = {}
   let marked = false;
   let walkAsked = false;
   let homeStep = 'door';
+  let zeroIndex = 0;
   let sceneToken = 0;
   let sharedLocked = false;
   const timers = [];
@@ -106,6 +108,8 @@ export function mountTrack09(root, { onChoose, onComplete, onMarkComplete } = {}
     [walkCopy, snackCopy, homeCopy, endingCopy].forEach((node) => setCopy(node, null));
     linesBox.replaceChildren();
     zeroCopy.replaceChildren();
+    talk.replaceChildren();
+    sit.hidden = true;
   }
 
   function setPhase(name, nextStep) {
@@ -188,46 +192,43 @@ export function mountTrack09(root, { onChoose, onComplete, onMarkComplete } = {}
     requestAnimationFrame(() => node.classList.add('is-in'));
   }
 
+  function appendOpenLine(text, extra = '') {
+    const line = document.createElement('p');
+    line.className = extra ? `t09-open-line ${extra}` : 't09-open-line';
+    line.textContent = text;
+    openLines.append(line);
+    return line;
+  }
+
+  async function revealOpenLine(node) {
+    await wait(20);
+    node.classList.add('is-in');
+    await wait(reduced ? 160 : 520);
+  }
+
   async function start() {
     root.replaceChildren(scene);
     await wait(40);
     scene.classList.add('is-in');
     setPhase('opening', 'title');
-    await wait(reduced ? 180 : 420);
-    kicker.classList.add('is-in');
-    await wait(reduced ? 280 : 720);
-    await showLine(TRACK_09_OPENING[0]);
-    setPhase('opening', 'line1');
+    await wait(reduced ? 160 : 520);
+    const first = appendOpenLine(TRACK_09_OPENING[0][0]);
+    await revealOpenLine(first);
+    await wait(reduced ? 180 : 780);
+    const next = appendOpenLine(TRACK_09_OPENING[0][1], 'is-next');
+    await revealOpenLine(next);
+    setPhase('opening', 'hold');
     locked = false;
   }
 
   async function advanceOpening() {
-    if (phase !== 'opening' || locked) return;
+    if (phase !== 'opening' || locked || step !== 'hold') return;
     locked = true;
-    if (step === 'line1') {
-      await showLine(TRACK_09_OPENING[1]);
-      setPhase('opening', 'line2');
-      locked = false;
-      return;
-    }
-    if (step === 'line2') {
-      await fadeOutLines();
-      kicker.classList.remove('is-in');
-      await wait(reduced ? 220 : 620);
-      nowPlaying.hidden = false;
-      await wait(20);
-      nowPlaying.classList.add('is-in');
-      setPhase('opening', 'now');
-      locked = false;
-      return;
-    }
-    if (step === 'now') {
-      nowPlaying.classList.add('is-out');
-      await wait(fadeMs);
-      opening.hidden = true;
-      locked = false;
-      enterChoice();
-    }
+    opening.classList.add('is-out');
+    await wait(reduced ? 160 : 640);
+    opening.hidden = true;
+    locked = false;
+    enterChoice();
   }
 
   function enterChoice() {
@@ -331,7 +332,7 @@ export function mountTrack09(root, { onChoose, onComplete, onMarkComplete } = {}
     setCopy(snackCopy, kind === 'hot' ? ['那吃热的。'] : ['这个也行。']);
     snackFood.classList.add('is-on');
     await wait(fadeMs);
-    setCopy(snackCopy, ['吃一点。']);
+    setCopy(snackCopy, ['这个好吃吗？']);
     setPhase('lateSnack', 'eat');
     locked = false;
   }
@@ -345,46 +346,80 @@ export function mountTrack09(root, { onChoose, onComplete, onMarkComplete } = {}
     if (step !== 'eat') return;
     locked = true;
     snackFood.classList.add('is-eaten');
-    setCopy(snackCopy, ['再吃一点。']);
+    setCopy(snackCopy, ['还行，你尝尝。']);
     setPhase('lateSnack', 'exit');
     locked = false;
   }
 
-  async function enterZero() {
-    setPhase('zeroZeroSeven', '0007');
-    clock.textContent = '00:07';
+  function showTalk(line) {
+    [...talk.children].forEach((node, index, list) => {
+      node.classList.toggle('is-prev', index === list.length - 1);
+      node.classList.toggle('is-gone', index < list.length - 1);
+    });
+    const row = document.createElement('p');
+    row.className = 't09-talk-line';
+    if (line.who === '林禾') row.classList.add('is-lin');
+    else if (line.who === '许遥') row.classList.add('is-xu');
+    else row.classList.add('is-note');
+    if (line.who) {
+      const who = document.createElement('span');
+      who.className = 't09-talk-who';
+      who.textContent = line.who;
+      row.append(who);
+    }
+    const text = document.createElement('span');
+    text.className = 't09-talk-text';
+    text.textContent = line.text;
+    row.append(text);
+    talk.append(row);
+    requestAnimationFrame(() => row.classList.add('is-in'));
+    later(() => {
+      talk.querySelectorAll('.t09-talk-line.is-gone').forEach((node) => node.remove());
+    }, 680);
+  }
+
+  function enterZero() {
+    zeroIndex = 0;
+    setPhase('zeroZeroSeven', 'mark');
     hideBranches();
     reveal(zero);
     locked = true;
-    await wait(reduced ? 280 : 700);
-    await showLine(['到了。']);
-    setPhase('zeroZeroSeven', 'arrived');
-    locked = false;
-  }
-
-  async function advanceZero() {
-    if (phase !== 'zeroZeroSeven' || locked || step !== 'arrived') return;
-    locked = true;
-    await showLine(['嗯。']);
-    setPhase('zeroZeroSeven', '0008');
-    locked = false;
-  }
-
-  async function tickClock() {
-    if (phase !== 'zeroZeroSeven' || locked) return;
-    if (step !== '0008' && step !== '0009') return;
-    locked = true;
-    if (step === '0008') {
-      clock.textContent = '00:08';
-      setPhase('zeroZeroSeven', '0009');
+    later(() => {
+      if (phase !== 'zeroZeroSeven') return;
+      showTalk(TRACK_09_ZERO[0]);
+      setPhase('zeroZeroSeven', 'talk');
       locked = false;
-      return;
-    }
-    clock.textContent = '00:09';
-    await showLine(['还没睡。']);
-    await wait(reduced ? 400 : 900);
-    setPhase('zeroZeroSeven', 'exit');
-    locked = false;
+    }, 880);
+  }
+
+  function advanceTalk() {
+    if (phase !== 'zeroZeroSeven' || locked || step !== 'talk') return;
+    if (zeroIndex >= TRACK_09_ZERO.length - 1) return;
+    locked = true;
+    const prev = TRACK_09_ZERO[zeroIndex];
+    zeroIndex += 1;
+    const next = TRACK_09_ZERO[zeroIndex];
+    const revealLine = () => {
+      if (phase !== 'zeroZeroSeven') return;
+      showTalk(next);
+      if (next.sitAfter) {
+        setPhase('zeroZeroSeven', 'rest');
+        later(() => {
+          if (phase !== 'zeroZeroSeven') return;
+          sit.hidden = false;
+          locked = false;
+        }, 720);
+        return;
+      }
+      locked = false;
+    };
+    if (prev.pauseAfter) later(revealLine, 760);
+    else revealLine();
+  }
+
+  function leaveZero() {
+    if (phase !== 'zeroZeroSeven' || locked || step !== 'rest') return;
+    enterShared();
   }
 
   function enterHome() {
@@ -450,22 +485,18 @@ export function mountTrack09(root, { onChoose, onComplete, onMarkComplete } = {}
     sharedLocked = true;
     locked = true;
     const fromZero = phase === 'zeroZeroSeven';
+    if (fromZero) {
+      zero.classList.add('is-out');
+      await wait(fadeMs);
+    }
     await fadeOutLines();
     hideBranches();
     scene.querySelectorAll('.t09-line').forEach((node) => node.remove());
-    if (fromZero) clock.removeEventListener('pointerup', onClockPointer);
     setPhase('sharedEnding', 'line1');
     ending.querySelector('.t09-ending-art').src = TRACK_09_IMAGES.ending;
     reveal(ending);
     setCopy(endingCopy, TRACK_09_SHARED[0]);
     locked = false;
-  }
-
-  function onClockPointer(event) {
-    event.stopPropagation();
-    if (step === 'arrived') advanceZero();
-    else if (step === 'exit') enterShared();
-    else tickClock();
   }
 
   async function advanceShared() {
@@ -511,8 +542,7 @@ export function mountTrack09(root, { onChoose, onComplete, onMarkComplete } = {}
     if (phase === 'opening') advanceOpening();
     else if (phase === 'nightWalk' && step === 'exit') enterShared();
     else if (phase === 'lateSnack' && step === 'exit') enterShared();
-    else if (phase === 'zeroZeroSeven' && step === 'arrived') advanceZero();
-    else if (phase === 'zeroZeroSeven' && step === 'exit') enterShared();
+    else if (phase === 'zeroZeroSeven' && step === 'talk') advanceTalk();
     else if (phase === 'sharedEnding' && step === 'line1') advanceShared();
   }
 
@@ -547,7 +577,10 @@ export function mountTrack09(root, { onChoose, onComplete, onMarkComplete } = {}
     eatSnack();
   });
 
-  clock.addEventListener('pointerup', onClockPointer);
+  sit.addEventListener('pointerup', (event) => {
+    event.stopPropagation();
+    leaveZero();
+  });
 
   homeDoor.addEventListener('pointerup', (event) => {
     event.stopPropagation();
@@ -578,7 +611,7 @@ export function mountTrack09(root, { onChoose, onComplete, onMarkComplete } = {}
     if (event.pointerType === 'mouse' && event.button !== 0) return;
     if (
       event.target.closest(
-        '.reset-progress, .t09-track, .night-hotspot, .t09-forward, .t09-food-pick, .t09-dish, .t09-clock, .t09-door, .t09-lamp, .t09-cat, .t09-home-next, .t09-ending-side, .t09-back',
+        '.reset-progress, .t09-track, .night-hotspot, .t09-forward, .t09-food-pick, .t09-dish, .t09-sit, .t09-door, .t09-lamp, .t09-cat, .t09-home-next, .t09-ending-side, .t09-back',
       )
     ) {
       return;

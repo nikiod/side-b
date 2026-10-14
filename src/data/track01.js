@@ -28,7 +28,7 @@ export const NOODLE_ENTRANCE_LINES = [
 
 export const NOODLE_INTERIOR_PROMPT = { speaker: '许遥', text: '怎么样？' };
 
-export const NOODLE_INTERIOR_LIN_PROMPT = { speaker: '林禾', text: '好不好吃？' };
+export const NOODLE_INTERIOR_LIN_PROMPT = { speaker: '许遥', text: '好不好吃？' };
 
 export const NOODLE_INTERIOR_CHOICES = [
   { id: 'good', text: '挺好吃的。' },

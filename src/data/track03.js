@@ -42,7 +42,7 @@ export const TRACK_03_GOODNIGHT = [
   { text: '晚安曲。' },
 ];
 
-export const TRACK_03_TODAY = '今天也会说话。';
+export const TRACK_03_TODAY = '后来，歌单里多了几首歌。';
 
 export const TRACK_03_TIME = ['聊天变多了。', '歌也还在继续。', '后来，', '终于又见面了。'];
 

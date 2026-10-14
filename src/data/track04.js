@@ -31,10 +31,10 @@ export const TRACK_04_ROUND1 = [
 export const TRACK_04_ROUND2 = [
   { id: 'sudden', label: '临时有事', kind: 'receipt' },
   { id: 'overtime', label: '加班', kind: 'strip' },
-  { id: 'later', label: '改天吧', kind: 'memo' },
+  { id: 'later', label: '晚上有事', kind: 'memo' },
   { id: 'rest', label: '想休息', kind: 'ticket' },
   { id: 'work', label: '工作', kind: 'label' },
-  { id: 'forgot', label: '忘了说', kind: 'receipt' },
+  { id: 'forgot', label: '晚点回来', kind: 'receipt' },
   { id: 'unsaid', label: '想说的话', kind: 'whisper', unsayable: true },
 ];
 

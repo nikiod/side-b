@@ -78,6 +78,21 @@ img {
     );
 }
 
+.music-toggle {
+  position: fixed;
+  top: 12px;
+  right: 14px;
+  z-index: 40;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: rgba(242, 232, 207, 0.34);
+}
+
+.music-toggle:hover {
+  color: rgba(242, 232, 207, 0.62);
+}
+
 .reset-progress {
   position: fixed;
   left: 10px;
