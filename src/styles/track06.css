@@ -631,7 +631,8 @@
 }
 
 .t06-frags.is-aside .t06-frag.is-1,
-.t06-frags.is-aside .t06-frag.is-3 {
+.t06-frags.is-aside .t06-frag.is-3,
+.t06-frags.is-aside .t06-frag.is-pair-right {
   transform: translateX(8vw);
   opacity: 0.22;
 }
@@ -661,9 +662,14 @@
   bottom: 18%;
 }
 
+.t06-frag.is-pair-right {
+  left: auto;
+  right: 10%;
+  bottom: 10%;
+}
+
 .t06-frag.is-msg-left,
-.t06-frag.is-msg-right,
-.t06-frag-msg {
+.t06-frag.is-msg-right {
   font-family: var(--serif);
 }
 
@@ -683,16 +689,6 @@
     radial-gradient(circle at 30% 40%, rgba(233, 184, 114, 0.18), transparent 55%);
   filter: blur(0.4px);
   box-shadow: inset 0 0 0 1px rgba(242, 232, 207, 0.2);
-}
-
-.t06-frag-msg {
-  display: block;
-}
-
-.t06-frag-msg.is-right {
-  margin-top: 8px;
-  text-align: right;
-  color: rgba(242, 232, 207, 0.78);
 }
 
 .t06-current {

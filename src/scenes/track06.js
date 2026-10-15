@@ -172,28 +172,39 @@ export function mountTrack06(root, { onComplete, onMarkComplete } = {}) {
   function spawnFrag() {
     const spec = TRACK_06_FRAGS[fragIndex];
     if (!spec) return;
-    const el = document.createElement('div');
-    el.className = `t06-frag is-${spec.kind} is-${fragIndex}`;
-    if (spec.kind === 'photo') {
-      const shot = document.createElement('span');
-      shot.className = 't06-frag-shot';
-      el.append(shot);
-    } else if (spec.kind === 'pair') {
+    const nodes = [];
+    if (spec.kind === 'pair') {
       spec.lines.forEach((line, i) => {
-        const row = document.createElement('span');
-        row.className = `t06-frag-msg is-${i === 0 ? 'left' : 'right'}`;
+        const row = document.createElement('div');
+        const side = i === 0 ? 'left' : 'right';
+        row.className = side === 'left'
+          ? `t06-frag is-msg-left is-${fragIndex}`
+          : 't06-frag is-msg-right is-pair-right';
+        row.dataset.frag = String(fragIndex);
         row.textContent = line;
-        el.append(row);
+        nodes.push(row);
       });
     } else {
-      el.textContent = spec.text;
+      const el = document.createElement('div');
+      el.className = `t06-frag is-${spec.kind} is-${fragIndex}`;
+      el.dataset.frag = String(fragIndex);
+      if (spec.kind === 'photo') {
+        const shot = document.createElement('span');
+        shot.className = 't06-frag-shot';
+        el.append(shot);
+      } else {
+        el.textContent = spec.text;
+      }
+      nodes.push(el);
     }
-    fragsBox.append(el);
-    requestAnimationFrame(() => el.classList.add('is-in'));
-    [...fragsBox.children].forEach((node, i, all) => {
-      node.classList.toggle('is-faded', all.length > 4 && i < all.length - 4);
-    });
+    nodes.forEach((node) => fragsBox.append(node));
+    requestAnimationFrame(() => nodes.forEach((node) => node.classList.add('is-in')));
     fragIndex += 1;
+    const newest = fragIndex - 1;
+    [...fragsBox.children].forEach((node) => {
+      const index = Number(node.dataset.frag);
+      node.classList.toggle('is-faded', fragIndex > 4 && newest - index >= 4);
+    });
   }
 
   function stopHold() {
